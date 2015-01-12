@@ -1,10 +1,10 @@
 name 'yum_mesosphere'
-maintainer 'The Authors'
-maintainer_email 'you@example.com'
+maintainer 'David Petzel'
+maintainer_email 'davidpetzel@gmail.com'
 license 'apache2'
 description 'Installs/Configures yum_mesosphere'
 long_description 'Installs/Configures yum_mesosphere'
-version '0.1.0'
+version '1.0.0'
 
 depends 'yum', '~> 3.0'
 
