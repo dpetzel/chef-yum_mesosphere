@@ -4,7 +4,7 @@ rvm:
 
 before_install:
   - sudo apt-get update -qq
-  - sudo apt-get install -y zlib1g-dev
+  - sudo apt-get install -y liblzma-dev
 
 install:
   - curl -L https://www.opscode.com/chef/install.sh | sudo bash -s -- -P chefdk
