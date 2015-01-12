@@ -1,0 +1,18 @@
+language: ruby
+rvm:
+  - 1.9.3
+  - 2.1.2
+env:
+  global:
+    - secure: BA0YyfbQZAdQCctpqt8G2mHMkclbUagvdo6y7nDfyVYLkYqFNFn++J8otZuYhSmE9CtVBJaygJPGBm5r+lliweaOyJbQI825rtsqk9TydJerb+CgIkSRx5fjqy1WNUNXUO0Sa1AIP5RJnBCB4Qc2NXH+Jv/stcEryLRTMm6nryBGy/uRTwVTYyz/tIRoALodISzSmUy1GCGHjY5kUU7VXtxnCNGiaFcscCxkjGt5Y5sddm9VhYxjEMh6qZn+f6B/zUHTHfLaBjJHbkqZh4meZzTb593fehF79rVZgaUQbpC7G3R0+XnYRIqeEsbqEzCaUmeldUHKIFJHzsV8vZflCg==
+    - "CI_REPORTS=shippable/testresults COVERAGE_REPORTS=shippable/codecoverage CI_NAME=shippable CI_BUILD_NUMBER=${BUILD_NUMBER} CI_BUILD_URL=${BUILD_URL} CI_BRANCH=${BRANCH}"
+
+install:
+  - curl -L https://www.opscode.com/chef/install.sh | sudo bash -s -- -P chefdk
+  - chef exec bundle install
+  - chef exec bundle exec berks install
+script:
+  - chef exec bundle exec rubocop .
+  - chef exec bundle exec foodcritic -G .
+  - chef exec bundle exec rubocop .
+  - chef exec bundle exec rspec --format RspecJunitFormatter --out shippable/testresults/rspec.xml
